@@ -1,0 +1,99 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="zxksglxtWeb.Site1" %>
+
+<!doctype html>
+<html lang="zh-CN">
+  <head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title><%= Page.Title %> -  Online Exam System</title>
+
+    <!-- Bootstrap -->
+      <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+        <script src="Scripts/html5shiv.min.js"></script>
+        <script src="Scripts/respond.min.js"></script>
+    <![endif]-->
+      <style>
+          body{
+              margin:0;
+              padding:0;
+              background:#eee;
+          }
+          table,tr,td,th,thead,tbody{
+              border:none;
+          }
+      </style>
+        <asp:ContentPlaceHolder ID="style" runat="server"></asp:ContentPlaceHolder>
+  </head>
+  <body>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-3">
+                  <div class="list-group">
+                      <%if (Session["login_role"] != null && Session["login_role"].ToString() == "Administrator") {  %>
+                      <a href="Default.aspx" class="list-group-item <%=Page.Title == "Home" ? "active" : "" %>">
+                        Home
+                      </a>
+                      <a href="TkList.aspx" class="list-group-item <%=Page.Title == "Question Bank List" ? "active" : "" %>">
+                        Question Bank List
+                      </a>
+                      <a href="SjList.aspx" class="list-group-item <%=Page.Title == "Exam Paper List" ? "active" : "" %>">
+                        Exam Paper List
+                      </a>
+                      <a href="YhxxList.aspx" class="list-group-item <%=Page.Title == "User List" ? "active" : "" %>">
+                        User List
+                      </a>
+                      <a href="KsxxList.aspx" class="list-group-item <%=Page.Title=="Exam List"?"active":"" %>">
+                        Exam List
+                      </a>
+                      <a href="Profile.aspx" class="list-group-item <%=Page.Title=="Edit Information"?"active":"" %>">
+                         Edit Information
+                      </a>
+                      <a href="Login.aspx" class="list-group-item <%=Page.Title=="Log Out"?"active":"" %>">
+                        Log Out
+                      </a>
+                      <%} %>
+                      <%if (Session["login_role"] != null && Session["login_role"].ToString() == "Candidate") {  %>
+                      <a href="Default.aspx" class="list-group-item <%=Page.Title == "Home" ? "active" : "" %>">
+                        Home
+                      </a>
+                      <a href="KsxxList.aspx" class="list-group-item <%=Page.Title=="Exam List"?"active":"" %>">
+                        Exam List
+                      </a>
+                      <a href="Profile.aspx" class="list-group-item <%=Page.Title=="Edit Information"?"active":"" %>">
+                        Edit Information
+                      </a>
+                      <a href="Login.aspx" class="list-group-item <%=Page.Title=="Log Out"?"active":"" %>">
+                        Log Out
+                      </a>
+                      <%} %>
+                  </div>
+              </div>
+              <div class="col-sm-9">
+                    <div class="panel" style="padding:0;margin-bottom:5px;">
+                        <div class="panel-body" style="padding:5px;">
+                            <ol class="breadcrumb" style="padding:5px;margin:0;">
+                              <%if (Page.Title != "Home"){ %>
+                              <li><a href="Default.aspx">Home</a></li>
+                              <%} %>
+                              <asp:ContentPlaceHolder ID="breadcrumb" runat="server"></asp:ContentPlaceHolder>
+                              <li class="active"><%=Page.Title %></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <asp:ContentPlaceHolder ID="content" runat="server"></asp:ContentPlaceHolder>
+              </div>
+          </div>
+      </div>
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+      <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+      <script src="Scripts/bootstrap.min.js"></script>
+        <asp:ContentPlaceHolder ID="script" runat="server"></asp:ContentPlaceHolder>
+  </body>
+</html>
